@@ -68,7 +68,7 @@ $conn->close();
     <title>ใบเสร็จย้อนหลัง</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="ff.css"> <!-- Link to CSS file -->
+    <link rel="stylesheet" href="bf.css"> <!-- Link to CSS file -->
 </head>
 <body>
     <nav class="navbar">
