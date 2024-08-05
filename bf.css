@@ -12,6 +12,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -49,7 +50,7 @@ body {
 }
 
 .navbar-menu a:hover {
-    background-color: #005091;
+    background-color: var(--hover-color);
     transform: translateY(-2px);
 }
 
@@ -61,7 +62,7 @@ body {
 
 .sidebar {
     width: var(--sidebar-width);
-    background-color: #fff;
+    background-color: var(--card-background);
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     transition: transform 0.3s ease-in-out;
@@ -84,7 +85,7 @@ body {
     margin-bottom: 10px;
 }
 
-.sidebar-menu a:hover {
+.sidebar-menu a:hover, .sidebar-menu a.active {
     background-color: var(--hover-color);
     color: var(--primary-color);
     transform: translateX(5px);
@@ -92,13 +93,6 @@ body {
 
 .sidebar-menu i {
     margin-right: 10px;
-    width: 20px;
-    text-align: center;
-}
-
-.main-content {
-    flex-grow: 1;
-    padding: 1rem;
 }
 
 .content {
@@ -108,23 +102,11 @@ body {
 }
 
 .content h1 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     margin-bottom: 30px;
     font-size: 2em;
-    border-bottom: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--secondary-color);
     padding-bottom: 10px;
-}
-
-h1, h2 {
-    color: var(--secondary-color);
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 form {
@@ -142,7 +124,7 @@ form {
 label {
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: var(--secondary-color);
+    color: var(--text-color);
 }
 
 select, button {
@@ -154,7 +136,7 @@ select, button {
 }
 
 select {
-    background-color: #f8f9fa;
+    background-color: var(--card-background);
 }
 
 button {
@@ -167,16 +149,14 @@ button {
 }
 
 button:hover {
-    background-color: #005194;
+    background-color: var(--secondary-color);
     transform: translateY(-2px);
 }
 
 table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
     margin-top: 1rem;
-    overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: var(--card-background);
@@ -185,19 +165,19 @@ table {
 th, td {
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
-    text-align: center; /* จัดข้อความให้อยู่กลางแนวนอน */
+    text-align: center;
 }
 
 th {
     background-color: var(--primary-color);
     color: white;
     font-weight: 600;
-    font-size: 1.1rem; /* เพิ่มขนาดตัวอักษร */
+    font-size: 1.1rem;
 }
 
 td {
     font-size: 1rem;
-    vertical-align: middle; /* จัดข้อความให้อยู่กลางแนวตั้ง */
+    vertical-align: middle;
 }
 
 tr:last-child td {
@@ -226,139 +206,28 @@ tr:nth-child(even) {
     display: inline-block;
 }
 
-/* ซ่อนส่วนที่ไม่ต้องการแสดงในการพิมพ์ */
-@media print {
-    body * {
-        visibility: hidden; /* ซ่อนทุกอย่าง */
-    }
-
-    .printable, .printable * {
-        visibility: visible; /* แสดงเฉพาะส่วนที่ต้องการพิมพ์ */
-    }
-
-    .printable {
-        page-break-after: always; /* แยกหน้าใหม่หลังจากพิมพ์แต่ละใบเสร็จ */
-    }
-
-    .navbar, .sidebar, .print-button, form {
-        display: none; /* ซ่อน Navbar, Sidebar, ปุ่มพิมพ์, และฟอร์ม */
-    }
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 1rem;
-    }
-    form {
-        grid-template-columns: 1fr;
-    }
-}
-
-.table {
-    color: var(--text-color);
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.table thead th {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    padding: 12px;
-    text-align: center; /* จัดข้อความใน thead ให้อยู่กลางแนวนอน */
-}
-
-.table tbody tr:hover {
-    background-color: #f2f2f2;
-}
-
-.table td, .table th {
-    border: 1px solid #ddd;
-    padding: 12px;
-}
-
-.table caption {
-    font-size: 1.2em;
-    margin: 10px 0;
-    color: var(--primary-color);
-    text-align: left;
-}
-
-/* Adjustments for better responsiveness */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        transform: translateX(-100%);
-        position: fixed;
-        height: 100%;
-        z-index: 999;
-    }
-    .sidebar.active {
-        transform: translateX(0);
-    }
-    .main-content {
-        margin-left: 0;
-    }
-    .nav {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-    }
-
-    .nav a {
-        padding: 10px 20px;
-        background-color: var(--primary-color);
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-
-    .nav a:hover {
-        background-color: var(--secondary-color);
-    }
-}
-
-.btn-warning {
-    background-color: #ffc107; /* Yellow color */
-    border: none;
-    color: #fff;
-}
-
-.btn-warning:hover {
-    background-color: #e0a800; /* Darker yellow on hover */
-}
-
-.btn-danger {
-    background-color: #dc3545; /* Red color */
-    border: none;
-    color: #fff;
-}
-
-.btn-danger:hover {
-    background-color: #c82333; /* Darker red on hover */
-}
-
-.btn-action {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
-    text-align: center;
-    display: inline-block;
-}
-
-/* เพิ่ม CSS นี้สำหรับการจัดตำแหน่งกลางของข้อความใน .payment-info */
 .payment-info {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
-    text-align: center; /* Center text */
-    box-sizing: border-box; /* Include padding and border in width calculations */
-    margin-top: 20px; /* Add margin to move it down */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .container, .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+    .sidebar {
+        position: static;
+        box-shadow: none;
+    }
+    .content {
+        padding: 10px;
+    }
+}
+h1,h2 {
+    text-align: center;
 }
